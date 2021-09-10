@@ -12,6 +12,7 @@ helpers do#erbファイル上で利用できるメソッド
     def current_user
        User.find_by(id: session[:user]) #ログイン中のユーザー情報取得
     end
+    
 end
 
 
@@ -29,7 +30,7 @@ post "/signup" do
         name: params[:name],
         password: params[:password],
         password_confirmation: params[:password_confirmation],
-        icon: params[:file]
+        icon: params[:icon]
     )
     if user.persisted? #Active Record object がDB に保存済みかどうかを判定
         session[:user] = user.id
@@ -50,4 +51,12 @@ end
 get "/signout" do#ログアウト
    session[:user]=nil
    redirect"/"
+end
+
+get "/home"do
+   erb :home 
+end
+
+get"/search"do
+   erb :search
 end
