@@ -75,6 +75,7 @@ get "/signout" do#ログアウト
 end
 
 get "/home"do
+    @musics=Post.where(user_id: session[:user])
    erb :home 
 end
 
@@ -117,4 +118,32 @@ post "/new"do
         user_id: session[:user]
     )
     redirect"/"
+end
+
+=begin
+post "/delete/:id"do
+    #song=Post.where(song: params[:song]).where(song: params[:id])
+    song=Post.find(params[:id])
+    song.destroy
+    redirect "/home"
+end
+=end
+
+get "/delete/:id"do
+    #song=Post.where(song: params[:song]).where(song: params[:id])
+    song=Post.find(params[:id])
+    song.destroy
+    redirect "/home"
+end
+
+get "/edit/:id"do
+    @song=Post.find(params[:id])
+    erb :edit
+end
+
+post "/edit/:id"do
+    song=Post.find(params[:id])
+    song.comment=params[:edit]
+    song.save
+    redirect"/home"
 end

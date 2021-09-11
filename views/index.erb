@@ -20,7 +20,7 @@
 <section class="center-vertical">
 	<h1>最新の投稿</h1>
 	<% if !@musics.empty? %>
-		<% @musics.each do |music| %>
+		<% @musics.each.reverse_each do |music| %>
 		
 			<div class="post center-vertical">
 				<img src="<%= music.jacket%>" width="125" height="125">

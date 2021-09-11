@@ -1,7 +1,25 @@
 <section class="center-vertical">
 	<h1><%= current_user.name %>の投稿</h1>
 	
+	<% if !@musics.empty? %>
+		<% @musics.each.reverse_each do |music| %>
+		
+			<div class="post center-vertical">
+				<img src="<%= music.jacket%>" width="125" height="125">
+				<p>artist: <%= music.artist%></p>
+				<p>song:<%= music.song%></p>
+				<p>コメント:<%= music.comment%></p>
+				<p>投稿者: <%= User.find_by(id: music.user_id).name %><br>
+						<a href="/delete/<%=music.id%>">削除</a><br><%#レコードのデフォルトのidを持ってくる%>
+						<a href="/edit/<%=music.id%>">編集</a><br><%#レコードのデフォルトのidを持ってくる%>
+				</p>
+
+			</div>
+		<% end %>
+	<% else %>
+	<%# TODO: ここで分岐 %>
 	<p>投稿がありません</p>
+	<% end %>
 </section>
 	
 	<section class="center-vertical">
