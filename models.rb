@@ -9,9 +9,9 @@ class User<ActiveRecord::Base
     has_many :posts;
     
     has_secure_password
-    validates :password,
-        format: {with:/(?=.*?[a-z])(?=.*?[0-9])/},
-        length: {in: 5..10}
+    #validates :password,
+    #    format: {with:/(?=.*?[a-z])(?=.*?[0-9])/},
+    #    length: {in: 5..10}
 end
 
 class Post<ActiveRecord::Base

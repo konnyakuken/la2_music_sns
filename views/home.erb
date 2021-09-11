@@ -1,14 +1,13 @@
 <section class="center-vertical">
-	<% if !current_user.nil? %><%# ログインしているとき%>
 	<h1><%= current_user.name %>の投稿</h1>
-
+	
 	<p>投稿がありません</p>
 </section>
-
-<section class="center-vertical">
-	<h1><%= current_user.name %>のイイねした投稿</h1>
-	<p>イイねがありません</p>
-</section>
+	
+	<section class="center-vertical">
+		<h1><%= current_user.name %>のイイねした投稿</h1>
+		<p>イイねがありません</p>
+	</section>
 
 <!--
 <section class="center-vertical">
@@ -20,4 +19,3 @@
 	<h1><%#= current_user.name %>のフォロワー</h1>
 </section>
 -->
-	<% end %>
