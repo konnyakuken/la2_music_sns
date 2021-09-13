@@ -13,7 +13,7 @@
 						<a href="/delete/<%=music.id%>">削除</a><br><%#レコードのデフォルトのidを持ってくる%>
 						<a href="/edit/<%=music.id%>">編集</a><br><%#レコードのデフォルトのidを持ってくる%>
 				</p>
-
+				
 			</div>
 		<% end %>
 	<% else %>
@@ -24,7 +24,29 @@
 	
 	<section class="center-vertical">
 		<h1><%= current_user.name %>のイイねした投稿</h1>
-		<p>イイねがありません</p>
+		<% if !@goods.empty? %>
+			<% @goods.each.reverse_each do |music| %>
+				<%music=Post.find_by(id: music.post_id)%>
+				<%goods=Like.where(post_id: music.id)%>
+					<div class="post center-vertical">
+						<img src="<%= music.jacket%>" width="125" height="125">
+						<p>artist: <%= music.artist%></p>
+						<p>song:<%= music.song%></p>
+						<p>コメント:<%= music.comment%></p>
+						<p>投稿者: <%= User.find_by(id: music.user_id).name %><br>
+						</p>
+							<p>
+							<% goods.each do |good| %>
+								<img src="<%= User.find_by(id: good.user_id).icon%>" alt="user_image" width="40" height="40">
+							<% end %>
+							</p>
+							<a href="/like/delete/<%=Like.find_by(user_id: session[:user],post_id: music.id).id %>">いいね解除</a>
+					</div>
+			<% end %>
+			
+		<%else%>
+			<p>イイねがありません</p>
+		<% end %>
 	</section>
 
 <!--

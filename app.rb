@@ -31,6 +31,7 @@ end
 
 get '/' do
    @musics=Post.all
+   @goods=Like.all
     erb :index
 end
 
@@ -76,7 +77,8 @@ end
 
 get "/home"do
     @musics=Post.where(user_id: session[:user])
-   erb :home 
+    @goods=Like.where(user_id: session[:user])
+    erb :home 
 end
 
 get"/search"do
@@ -117,7 +119,7 @@ post "/new"do
         comment: params[:comment],
         user_id: session[:user]
     )
-    redirect"/"
+    redirect"/home"
 end
 
 =begin
@@ -145,5 +147,22 @@ post "/edit/:id"do
     song=Post.find(params[:id])
     song.comment=params[:edit]
     song.save
+    redirect"/home"
+end
+
+get "/like/:id"do
+    
+    if Like.find_by(user_id: session[:user],post_id: params[:id])==nil
+        Like.create(
+            user_id: session[:user],
+            post_id: params[:id]
+            )
+    end
+    redirect"/home"
+end
+
+get "/like/delete/:id" do
+    song=Like.find(params[:id])
+    song.destroy
     redirect"/home"
 end
