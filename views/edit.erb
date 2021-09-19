@@ -1,7 +1,7 @@
 <section class="center-vertical">
 	<h1>コメントの更新</h1>
 	<form action="/edit/<%= @song.id%>" method="post">
-	    <input type="text" name="edit" placeholder="<%= @song.comment%>"><br>
+	    <input type="text" name="edit" value="<%= @song.comment%>"><br>
 	    <input type="submit" value="送信">
 	</form>
 </section>
